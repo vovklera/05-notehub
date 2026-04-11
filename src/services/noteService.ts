@@ -1,7 +1,7 @@
 import type {Note, FetchNotesResponse, NewNote} from "../types/note.ts";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://notehub-public.goit.study";
+axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
 export const fetchNotes = async (searchTodo: string, page: number = 1): Promise<FetchNotesResponse>=>{
     const response = await axios.get<FetchNotesResponse>("/notes",{

@@ -8,22 +8,27 @@ import Pagination from "../Pagination/Pagination.tsx";
 
 export default function App() {
     const [searchTodo, setSearchTodo] = useState("");
-
     const [selectedNote, setSelectedNote] = useState<Note | null>(null)
+    const [page, setPage] = useState(1);
 
     const {data, isSuccess, isError}= useQuery({
-        queryKey: ['notes', searchTodo],
-        queryFn: ()=>fetchNotes(searchTodo),
+        queryKey: ['notes', searchTodo, page],
+        queryFn: ()=>fetchNotes(searchTodo, page),
         placeholderData: keepPreviousData,
     });
 
-    const notes = data?.results ?? [];
+    const notes = data?.notes ?? [];
+
+    const handlePageChange = (page: number) => {
+        setPage(page);
+    }
 
     return (
       <div className={css.app}>
           <header className={css.toolbar}>
+              <button className={css.button}>Create note +</button>
               {/* Компонент SearchBox */}
-              {notes.length > 0 &&(<Pagination forcePage={} pageCount={} onPageChange={}/>)}
+              {notes.length > 0 &&(<Pagination forcePage={page} onPageChange={handlePageChange} pageCount={data?.totalPages??0}/>)}
               {notes.length>0 && (<NoteList notes={notes} onDeleteNote={}/>)}
           </header>
       </div>
