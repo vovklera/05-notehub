@@ -1,9 +1,17 @@
 export interface Note {
     id: number;
-    poster_path: string;
-    backdrop_path: string;
     title: string;
-    overview: string;
-    release_date: string;
-    vote_average: number;
+    content: string;
+    tag: string;
+}
+
+export interface FetchNotesResponse {
+    results: Note[];
+    total_pages: number;
+}
+
+export interface NewNote {
+    id: number;
+    title: string;
+    content: string;
 }
