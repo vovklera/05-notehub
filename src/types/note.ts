@@ -1,5 +1,5 @@
 export interface Note {
-    id: number;
+    id: string;
     title: string;
     content: string;
     tag: string;
@@ -10,8 +10,8 @@ export interface FetchNotesResponse {
     totalPages: number;
 }
 
-export interface NewNote {
-    id: number;
+export interface NoteFormData{
     title: string;
     content: string;
+    tag: string;
 }

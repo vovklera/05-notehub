@@ -1,13 +1,14 @@
-import type {Note, FetchNotesResponse, NewNote} from "../types/note.ts";
+import type {Note, FetchNotesResponse, NoteFormData} from "../types/note.ts";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://notehub-public.goit.study/api";
 
-export const fetchNotes = async (searchTodo: string, page: number = 1): Promise<FetchNotesResponse>=>{
+export const fetchNotes = async (searchTodo: string, page: number = 1, perPage: number = 12): Promise<FetchNotesResponse>=>{
     const response = await axios.get<FetchNotesResponse>("/notes",{
         params: {
             search: searchTodo,
-            page
+            page,
+            perPage
         },
         headers: {
             Authorization: `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`,
@@ -16,7 +17,7 @@ export const fetchNotes = async (searchTodo: string, page: number = 1): Promise<
     return response.data;
 }
 
-export const createNote = async (newNote: NewNote): Promise<Note> => {
+export const createNote = async (newNote: NoteFormData): Promise<Note> => {
     const response = await axios.post<Note>("/notes", newNote);
     return response.data;
 }
