@@ -18,14 +18,14 @@ const initialValues: NoteFormData = {
 
 const validationSchema = Yup.object().shape({
     title: Yup.string()
-        .min(2, "Title is too short")
+        .min(3, "Title is too short")
         .max(50, "Title is too long")
         .required('Title is required'),
     content: Yup.string()
         .max(500, "Content is too long"),
     tag: Yup.string()
         .oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'], 'Invalid tag')
-        .required('Todo is required')
+        .required()
 })
 
 export default function NoteForm({onClose}: NoteFormProps) {

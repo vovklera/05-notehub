@@ -21,7 +21,8 @@ export default function App() {
 
     const [searchTodo, setSearchTodo] = useState("");
     const handleSearch = useDebouncedCallback((e:string)=>{
-        setSearchTodo(e)
+        setSearchTodo(e);
+        setPage(1);
     }, 300);
 
     const perPage = 12;
